@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from App_Login.forms import CreateNewUser
-from django.contrib.auth import authenticate, Login, Logout
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse, reverse_lazy
 
 # Create your views here.
