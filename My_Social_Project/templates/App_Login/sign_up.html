@@ -5,14 +5,18 @@
 
 {% block body_block %}
 
-<form method="POST">
+<div class="container">
 
-  {{form|crispy}}
-  {% csrf_token %}
+  <form method="POST">
 
-  <button type="submit">Sign Up</button>
-  
-</form>
+    {{form|crispy}}
+    {% csrf_token %}
+
+    <button type="submit" style="width:100%" class="btn btn-primary">Sign Up</button>
+
+  </form>
+
+</div>
 
 
 {% endblock %}
