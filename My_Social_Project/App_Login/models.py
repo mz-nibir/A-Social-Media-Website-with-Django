@@ -13,3 +13,4 @@ class UserProfile(models.Model):
     website = models.URLField(blank=True)
 
     facebook = models.URLField(blank=True)
+ 
