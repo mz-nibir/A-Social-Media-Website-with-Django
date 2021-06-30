@@ -22,7 +22,7 @@ class CreateNewUser(UserCreationForm):
         fields = ('email','username','password1','password2')
 
 
-class EditProfile(forms.Model):
+class EditProfile(forms.ModelForm):
     dob = forms.DateField(widget=forms.TextInput(attrs={'type':'date'}))
 
     class Meta:
