@@ -21,7 +21,7 @@ def sign_up(request):
             return HttpResponseRedirect(reverse('App_Login:login'))
 
     dict={'title':'sign up . Instragram','form':form, 'registered':registered}
-    return render(request, 'App_Login/sign_up.html', context= dict)
+    return render(request, 'App_Login/sign_up.html', context=dict)
 
 def login_page(request):
     form = AuthenticationForm()
@@ -34,23 +34,23 @@ def login_page(request):
             # check user active/ase ki na ..?
             if user is not None:
                 login(request, user)
-                pass
+                return HttpResponseRedirect(reverse('App_Posts:home'))
 
     return render(request, 'App_Login/login.html', context={'title':'login', 'form':form})
 
-@login_required
+# @login_required
 def edit_profile(request):
     current_user = UserProfile.objects.get(user=request.user)
     form = EditProfile(instance=current_user)
     if request.method == 'POST':
-        form = EditProfile(request.POST,request.FILES, instance=current_user)
+        form = EditProfile(request.POST, request.FILES, instance=current_user)
         if form.is_valid():
             form.save(commit=True)
             form = EditProfile(instance=current_user)
 
     return render(request, 'App_Login/profile.html', context={'form':form, 'title':'Edit Profile . Social'})
 
-@login_required
+# @login_required
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('App_Login:login'))
