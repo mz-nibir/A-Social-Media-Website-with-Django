@@ -17,8 +17,8 @@ class UserProfile(models.Model):
 
 
 class Follow(models.Model):
-    follower = models.ForeignKey(User, on_delete=models.CASACADE, related_name='follower')
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
     # kake follow korse
-    following = models.ForeignKey(User, on_delete=models.CASACADE, related_name='following')
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
     # kokhon follow korese
     date_created = models.DateTimeField(auto_now_add=True)
