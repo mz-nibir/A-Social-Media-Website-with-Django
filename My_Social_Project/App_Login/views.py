@@ -28,8 +28,8 @@ def login_page(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data('username')
-            password = form.cleaned_data('password')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             # check user active/ase ki na ..?
             if user is not None:
@@ -38,7 +38,7 @@ def login_page(request):
 
     return render(request, 'App_Login/login.html', context={'title':'login', 'form':form})
 
-# @login_required
+@login_required
 def edit_profile(request):
     current_user = UserProfile.objects.get(user=request.user)
     form = EditProfile(instance=current_user)
@@ -50,7 +50,7 @@ def edit_profile(request):
 
     return render(request, 'App_Login/profile.html', context={'form':form, 'title':'Edit Profile . Social'})
 
-# @login_required
+@login_required
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('App_Login:login'))
