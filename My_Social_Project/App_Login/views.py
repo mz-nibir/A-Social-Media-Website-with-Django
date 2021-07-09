@@ -47,6 +47,7 @@ def edit_profile(request):
         if form.is_valid():
             form.save(commit=True)
             form = EditProfile(instance=current_user)
+            return HttpResponseRedirect(reverse('App_Login:profile'))
 
     return render(request, 'App_Login/profile.html', context={'form':form, 'title':'Edit Profile . Social'})
 
