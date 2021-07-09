@@ -67,6 +67,7 @@ def profile(request):
             # obj create korbo (post)..jekhane form er info save korbo but db te pathabo na..
             post = form.save(commit=False)
             # author ta set korbo...(je user use korse sei author hisebe set hobe)
+            post.author = request.user
             post.save()
             return HttpResponseRedirect(reverse('home'))
     return render(request, 'App_Login/user.html', context={'title':'User', 'form':form})
