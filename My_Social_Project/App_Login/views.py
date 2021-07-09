@@ -6,6 +6,8 @@ from App_Login.models import UserProfile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
+from App_Posts.forms import PostForm
+
 # Create your views here.
 
 def sign_up(request):
@@ -58,4 +60,13 @@ def logout_user(request):
 
 @login_required
 def profile(request):
-    return render(request, 'App_Login/user.html', context={'title':'User'})
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            # obj create korbo (post)..jekhane form er info save korbo but db te pathabo na..
+            post = form.save(commit=False)
+            # author ta set korbo...(je user use korse sei author hisebe set hobe)
+            post.save()
+            return HttpResponseRedirect(reverse('home'))
+    return render(request, 'App_Login/user.html', context={'title':'User', 'form':form})
