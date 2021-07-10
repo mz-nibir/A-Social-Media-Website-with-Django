@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 
 from App_Posts.forms import PostForm
 
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 def sign_up(request):
@@ -71,3 +73,15 @@ def profile(request):
             post.save()
             return HttpResponseRedirect(reverse('home'))
     return render(request, 'App_Login/user.html', context={'title':'User', 'form':form})
+
+
+@login_required
+def user(request, username):
+    # jar username er sathe match korbe tar info asbe..
+    user_other = User.objects.get(username=username)
+
+    # jodi kono user nijer profile e click kore..tahole tar slef profile e niye jaoya hobe
+    if user_other == request.user:
+        return HttpResponseRedirect(reverse('App_Login:profile'))
+
+    return render(request, 'App_Login/user_other.html', context={'user_other':user_other})

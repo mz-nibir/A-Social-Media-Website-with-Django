@@ -16,7 +16,7 @@
 
       </div>
       <div class="col-sm-10">
-       {{user.username}}
+      <a href="{% url 'App_Login:user' username=user.username %}"> {{user.username}}</a> 
         <br>
         {{user.user_profile.full_name}}
 
