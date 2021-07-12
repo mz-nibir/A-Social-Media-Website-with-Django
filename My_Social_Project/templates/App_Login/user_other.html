@@ -33,7 +33,13 @@
 
   </div>
   <div class="col-sm-8">
-    <h1>{{user_other.username}} &nbsp;</h1>
+    <h1>{{user_other.username}} &nbsp;
+      {% if not already_followed %}
+      <a href="{% url 'App_Login:follow' username=user_other.username %}" class="btn btn-primary">Follow</a>
+      {% else %}
+      <a href="{% url 'App_Login:unfollow' username=user_other.username %}" class="btn btn-primary">Unfollow</a>
+      {% endif %}
+    </h1>
     <br>
     <!-- related_name--post,following,follower &nbsp for creating space -->
     <h4>{{user_other.post.count}} posts &nbsp; &nbsp; {{user_other.following.count}} followers &nbsp; &nbsp; {{user.follower.count}} following</h4>
